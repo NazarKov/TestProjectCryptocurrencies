@@ -10,19 +10,19 @@ namespace TestProjectCryptocurrencies.Model.InformationPage
     internal class MainModel
     {
         private HttpService _httpService;
-        private List<Datum> _datumList;
+        private List<Coin> _cointList;
 
         public MainModel() 
         {
             _httpService = new HttpService();
-            _datumList = new List<Datum>();
+            _cointList = new List<Coin>();
         }
 
-        public List<Datum> GetList(int count)
+        public List<Coin> GetList(int count)
         {
             try
             {
-                var item = HttpService.GetResponse();
+                var item = HttpService.GetCoints();
                 if (item == null)
                 {
                     throw new Exception("Null");
@@ -30,33 +30,33 @@ namespace TestProjectCryptocurrencies.Model.InformationPage
                 else
                 {
                     if(item.Result !=null)
-                        _datumList = item.Result.data.Take(count).ToList();
-                    return _datumList;
+                        _cointList = item.Result.data.Take(count).ToList();
+                    return _cointList;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return new List<Datum>();
+                return new List<Coin>();
             }
         }
 
-        public List<Datum> GetItem(string searchItem)
+        public List<Coin> GetItem(string searchItem)
         {
             try
             {
-                List<Datum> resultSearh = new List<Datum>();
-                foreach(Datum datum in _datumList)
+                List<Coin> resultSearh = new List<Coin>();
+                foreach(Coin coin in _cointList)
                 {
-                    if(datum.name.ToLower().Contains(searchItem.ToLower()))
-                        resultSearh.Add(datum);
+                    if(coin.name.ToLower().Contains(searchItem.ToLower()))
+                        resultSearh.Add(coin);
                 }
                 if(resultSearh.Count== 0)
                 {
-                    foreach (Datum datum in _datumList)
+                    foreach (Coin coin in _cointList)
                     {
-                        if (datum.symbol.ToLower().Contains(searchItem.ToLower()))
-                            resultSearh.Add(datum);
+                        if (coin.symbol.ToLower().Contains(searchItem.ToLower()))
+                            resultSearh.Add(coin);
                     }
                 }
 
@@ -65,7 +65,7 @@ namespace TestProjectCryptocurrencies.Model.InformationPage
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return new List<Datum>();
+                return new List<Coin>();
             }
         }
     }

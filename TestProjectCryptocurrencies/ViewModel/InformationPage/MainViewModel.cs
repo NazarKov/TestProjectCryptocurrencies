@@ -23,7 +23,7 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         public MainViewModel() 
         {
             _model = new MainModel();
-            _listCoints = new List<Datum>();
+            _listCoints = new List<Coin>();
            
             _coutShowDataGrid = new List<string>();
             _selectedItemComboCox = string.Empty;
@@ -42,8 +42,8 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
             new Thread(new ThreadStart(GetResponse)).Start();
         }
 
-        private List<Datum> _listCoints;
-        public List<Datum> ListCoints
+        private List<Coin> _listCoints;
+        public List<Coin> ListCoints
         {
             get { return _listCoints; }
             set { _listCoints = value; OnPropertyChanged("ListCoints"); }
@@ -92,9 +92,15 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         public ICommand RedirectWebCiteCommand { get => new DelegateParameterCommand(RedirectWebCite, CanRegister); }
         private void RedirectWebCite(object parameter)
         {
-            Process.Start(new ProcessStartInfo(((Datum)parameter).explorer) { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo(((Coin)parameter).explorer) { UseShellExecute = true });
 
 
+        }
+        public ICommand OpenCoinInformanionComman { get => new DelegateParameterCommand(OpenCoinInformanion, CanRegister); }
+        private void OpenCoinInformanion(object parameter)
+        {
+            StaticResourse.Coin = ((Coin)parameter);
+            Navigation.NavigationServise.OpenCoinInformationPage();
         }
         private bool CanRegister(object parameter) => true;
     }

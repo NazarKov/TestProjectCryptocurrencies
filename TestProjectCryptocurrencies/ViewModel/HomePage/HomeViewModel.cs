@@ -14,17 +14,12 @@ namespace TestProjectCryptocurrencies.ViewModel.HomePage
 {
     internal class HomeViewModel : ViewModel<HomeViewModel>
     {
-        public HomeViewModel() 
+        public HomeViewModel(Frame frame) 
         {
-            _pages = new MainPage();
-        }
 
-    
-        private Page _pages;
-        public Page Pages
-        {
-            get { return _pages; }
-            set { _pages = value;OnPropertyChanged("Pages"); }
+            Navigation.Init(frame);
+            Navigation.NavigationServise.OpenMainPage();
+           
         }
     }
 }
