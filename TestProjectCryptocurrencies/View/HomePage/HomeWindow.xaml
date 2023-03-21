@@ -3,18 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.HomePage" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.HomePage" 
+        xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
         mc:Ignorable="d"
-        Title="HomeWindow" Height="450" Width="800" WindowState="Maximized">
-    <Window.Resources>
-    </Window.Resources>
+        Title="{x:Static l:Language.Home_page}" Height="450" Width="800" WindowState="Maximized" x:Name="window">
+
     <Grid>
         <Menu VerticalAlignment="Top" Height="20">
-            <MenuItem Header="Програма">
-                <MenuItem Header="Найтройки"></MenuItem>
-                <MenuItem Header="Вийти"></MenuItem>
+            <MenuItem Header="{x:Static l:Language.program}">
+                <MenuItem Header="{x:Static l:Language.settings}" Command="{Binding OpenSettingCommand}"></MenuItem>
+                <MenuItem Header="{x:Static l:Language.exit}"  Command="{Binding ExitWindow}" CommandParameter="{Binding ElementName=window, Mode=OneWay}"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Сайт програми"></MenuItem>
+            <MenuItem Header="{x:Static l:Language.Program_website}" Command="{Binding ElementName=window , Path=DataContext.RedirectWebCiteCommand }"  
+                                    CommandParameter="{Binding}"></MenuItem>
         </Menu>
 
         <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>

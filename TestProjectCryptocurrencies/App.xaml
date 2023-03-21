@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TestProjectCryptocurrencies"
              StartupUri="View/HomePage/HomeWindow.xaml">
     <Application.Resources>
-         
+       
     </Application.Resources>
 </Application>

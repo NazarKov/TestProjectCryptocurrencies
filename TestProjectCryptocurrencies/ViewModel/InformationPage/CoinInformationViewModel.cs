@@ -37,6 +37,8 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         private ICommand _showThreeMounthInScheduleCommand;
         private ICommand _showOneYearInScheduleCommand;
         private ICommand _returnCalulatorResultCommand;
+        private ICommand _returnConvertedResultCommand;
+        private ICommand _returnConvertedValueCommand;
 
         public CoinInformationViewModel()
         {
@@ -50,6 +52,11 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
             _coinMarkers = new List<CoinMarker>();
             _calculatorValue = string.Empty;
             _calculatorValue = "1";
+            _selectedValueComboBox = string.Empty;
+            _converterResult = 0;
+            _dataSeries = new SeriesCollection();
+            _calculatorResult = string.Empty;
+            _coinNameList = new List<string>();
 
             _returnInMainPage = new DelegateCommand(() => { Navigation.NavigationServise.OpenMainPage(); });
             _showOneDaysInScheduleCommand = new DelegateCommand(() => { SetSchedule(TypeInterval.OneDay); });
@@ -58,7 +65,8 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
             _showThreeMounthInScheduleCommand = new DelegateCommand(() => { SetSchedule(TypeInterval.ThreeMounth); });
             _showOneYearInScheduleCommand = new DelegateCommand(() => { SetSchedule(TypeInterval.OneYear);  });
             _returnCalulatorResultCommand = new DelegateCommand(ReturnCalulatorResult);
-
+            _returnConvertedResultCommand = new DelegateCommand(ReturnConvertorResult);
+            _returnConvertedValueCommand = new DelegateCommand(ReturnConvertorValue);
             Height = Application.Current.MainWindow.Height;
             Width = Application.Current.MainWindow.Width;
 
@@ -91,6 +99,8 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         private void SetField()
         {
             NameCoin = StaticResourse.Coin.name;
+            CoinNameList = StaticResourse.CoinList.Select(item => item.name).ToList();
+            SelectedValueComboBox = StaticResourse.CoinList.Where(item =>item.name!=StaticResourse.Coin.name.ToString()).Select(item => item.name).ToList()[0];
             PriceCoin = "$ " +double.Parse(StaticResourse.Coin.priceUsd,_formatter);
 
             var result = _model.GetMarkets().ToList();
@@ -98,6 +108,30 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
             {
                 CoinMarkers.AddRange(result);
             }
+        }
+        private double _converterResult;
+        public double ConverterResult
+        {
+            get { return _converterResult; }
+            set { _converterResult = value; OnPropertyChanged("ConverterResult"); }
+        }
+        private double _converterValue;
+        public double ConverterValue
+        {
+            get { return _converterValue; }
+            set { _converterValue = value; OnPropertyChanged("ConverterValue"); }
+        }
+        private string _selectedValueComboBox;
+        public string SelectedValueComboBox
+        {
+            get { return _selectedValueComboBox; }
+            set { _selectedValueComboBox = value; OnPropertyChanged("SelectedValueComboBox"); }
+        }
+        private List<string> _coinNameList;
+        public List<string> CoinNameList
+        {
+            get { return _coinNameList; }
+            set { _coinNameList = value; OnPropertyChanged("CoinNameList"); }
         }
 
         private List<CoinMarker> _coinMarkers;
@@ -175,7 +209,7 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         public ICommand ShowOneMounthInScheduleCommand => _showOneMounthInScheduleCommand;
         public ICommand ShowThreeMounthInScheduleCommand => _showThreeMounthInScheduleCommand;
         public ICommand ShowOneYearInScheduleCommand => _showOneYearInScheduleCommand;
-
+       
         public ICommand RedirectWebCiteCommand { get => new DelegateParameterCommand(RedirectWebCite, CanRegister); }
         private void RedirectWebCite(object parameter)
         {
@@ -190,6 +224,16 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         {
             if(CalculatorValues!=string.Empty)
                 CalculatorResult = CalculatorValues + " " + StaticResourse.Coin.symbol + " = USD $" + (double.Parse(CalculatorValues.ToString()) *double.Parse(StaticResourse.Coin.priceUsd.ToString(),_formatter));
+        }
+        public ICommand ReturnConvertedResultCommand => _returnConvertedResultCommand;
+        private void ReturnConvertorResult()
+        {
+            ConverterResult = (double.Parse(StaticResourse.Coin.priceUsd, _formatter) * ConverterValue) / double.Parse(StaticResourse.CoinList.Where(item => item.name == SelectedValueComboBox.ToString()).ToList()[0].priceUsd,_formatter);
+        }
+        public ICommand ReturnConvertedValueCommand => _returnConvertedValueCommand;
+        private void ReturnConvertorValue()
+        {
+            ConverterValue = (double.Parse(StaticResourse.CoinList.Where(item => item.name == SelectedValueComboBox.ToString()).ToList()[0].priceUsd, _formatter) * ConverterResult) / double.Parse(StaticResourse.Coin.priceUsd, _formatter);                   
         }
     }
 

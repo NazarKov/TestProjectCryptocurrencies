@@ -5,25 +5,53 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.InformationPage"  
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
       Height="{Binding Height}" Width="{Binding Width}"
       Title="CoinInformationPage" x:Name="Page" >
     <Page.DataContext>
         <local:CoinInformationViewModel></local:CoinInformationViewModel>
     </Page.DataContext>
+    <Page.Resources>
+        <Style x:Key="DataViewHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="6,3,6,3"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="Background" Value="#66B2FF"></Setter>
+            <Setter Property="BorderBrush" Value="#3399FF"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5"
+                                Background="{TemplateBinding Background}">
 
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="600"></ColumnDefinition>
                 <ColumnDefinition Width="600"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="75"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
@@ -31,52 +59,43 @@
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="150*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label x:Name="label" Grid.Column="2" Grid.Row="1" Content="{Binding NameCoin}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="label1" Grid.Column="2" Grid.Row="2" Content="{Binding PriceCoin}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button x:Name="button"  Grid.Row="0" Grid.Column="0" Content="Повернутися назад" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding ReturnInMainPage}"/>
+            <Label x:Name="label" Grid.Column="2" Grid.Row="1" Content="{Binding NameCoin}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe UI"/>
+            <Label x:Name="label1" Grid.Column="2" Grid.Row="2" Content="{Binding PriceCoin}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe UI"/>
 
-            <Button x:Name="button1" Grid.Column="2" Command="{Binding ShowOneDaysInScheduleCommand}" Content="1 дн" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
-            <Button x:Name="button2" Grid.Column="2" Command="{Binding ShowSevenDaysInScheduleCommand}" Content="7 дн" HorizontalAlignment="Left" Margin="90,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
-            <Button x:Name="button3" Grid.Column="2" Command="{Binding ShowOneMounthInScheduleCommand}" Content="1 міс" HorizontalAlignment="Left" Margin="135,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
-            <Button x:Name="button4" Grid.Column="2" Command="{Binding ShowThreeMounthInScheduleCommand}" Content="6 міс" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
-            <Button x:Name="button5" Grid.Column="2" Command="{Binding ShowOneYearInScheduleCommand}" Content="1 р" HorizontalAlignment="Left" Margin="225,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Button x:Name="button"  Grid.Row="0" Grid.Column="0" Content="{x:Static l:Language.Return_to_the_main_page}"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding ReturnInMainPage}" Style="{StaticResource Button}" Width="140" />
+
+            <Button x:Name="button1" Grid.Column="2" Style="{StaticResource Button}" Width="50" Command="{Binding ShowOneDaysInScheduleCommand}" Content="{x:Static l:Language._1_Day}" HorizontalAlignment="Left" Margin="35,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Button x:Name="button2" Grid.Column="2" Style="{StaticResource Button}" Width="50" Command="{Binding ShowSevenDaysInScheduleCommand}" Content="{x:Static l:Language._7_Days}" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Button x:Name="button3" Grid.Column="2" Style="{StaticResource Button}" Width="50" Command="{Binding ShowOneMounthInScheduleCommand}" Content="{x:Static l:Language._1_Mon}" HorizontalAlignment="Left" Margin="155,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Button x:Name="button4" Grid.Column="2" Style="{StaticResource Button}" Width="50" Command="{Binding ShowThreeMounthInScheduleCommand}" Content="{x:Static l:Language._6_Mon}" HorizontalAlignment="Left" Margin="215,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Button x:Name="button5" Grid.Column="2" Style="{StaticResource Button}" Width="50" Command="{Binding ShowOneYearInScheduleCommand}" Content="{x:Static l:Language._1_Year}" HorizontalAlignment="Left" Margin="275,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
 
             <lvc:CartesianChart  Grid.Row="4" Grid.Column="2" Series="{Binding DataSeries,UpdateSourceTrigger=PropertyChanged}" >
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Дата" Labels="{Binding Dates}"/>
+                    <lvc:Axis Title="{x:Static l:Language.Data}" FontFamily="Segoe UI" Labels="{Binding Dates}"/>
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Ціна"/>
+                    <lvc:Axis Title="{x:Static l:Language.Price}" FontFamily="Segoe UI"/>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
-            <GroupBox Header="Кількулятор ціни" Grid.Row="4" Grid.Column="3" FontSize="18">
-                <Grid>
-                    <Label x:Name="label2" Grid.Column="3" Content="Кількість монет" HorizontalAlignment="Left" Margin="15,15,0,0" Grid.Row="3" VerticalAlignment="Top"/>
 
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="15,65,0,0" TextWrapping="Wrap" Text="{Binding CalculatorValues,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding ReturnCalulatorResultCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
-                    <Label x:Name="label3" Grid.Column="3" Content="{Binding CalculatorResult,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="15,90,0,0" Grid.Row="4" VerticalAlignment="Top"/>
-
-                </Grid>
-            </GroupBox>
-            <Label x:Name="label5" Grid.Column="2" Content="Ринкі де можна купити валюту" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
-            <DataGrid x:Name="dataGrid" Grid.Column="2" Grid.Row="6" ItemsSource="{Binding CoinMarkers}" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,35" CanUserAddRows="False" AutoGenerateColumns="False" ColumnWidth="*">
+            <Label x:Name="label5" Grid.Column="2" Content="{x:Static l:Language.Markets_where_you_can_buy_currency}" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontSize="18" FontFamily="Segoe UI"/>
+            <DataGrid x:Name="dataGrid" Grid.Column="2" Grid.Row="6" ItemsSource="{Binding CoinMarkers}" Grid.ColumnSpan="2" ColumnHeaderStyle="{StaticResource DataViewHeaderStyle}"
+                      Grid.RowSpan="2" Margin="0,0,0,35" CanUserAddRows="False" AutoGenerateColumns="False" ColumnWidth="*" Background="#f5f5f5" BorderBrush="#ddd"  GridLinesVisibility="None" SelectionMode="Single"
+                      >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Назва ринку" Binding="{Binding exchangeId}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Монета яку купляти" Binding="{Binding baseId}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Монета за купляти" Binding="{Binding quoteId}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Ціна" Binding="{Binding priceUsd}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Продано за 24г" Binding="{Binding volumeUsd24Hr}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static l:Language.Name_of_the_market}" Binding="{Binding exchangeId}" FontFamily="Segoe UI"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static l:Language.coin_to_buy}" Binding="{Binding baseId}" FontFamily="Segoe UI"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static l:Language.the_coin_to_buy_with}" Binding="{Binding quoteId}" FontFamily="Segoe UI"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static l:Language.Price}" Binding="{Binding priceUsd}" FontFamily="Segoe UI"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{x:Static l:Language.Volume_in_24_hours}" Binding="{Binding volumeUsd24Hr}" FontFamily="Segoe UI"></DataGridTextColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Сайт" Command="{Binding ElementName=Page , Path=DataContext.RedirectWebCiteCommand }" 
+                                <Button Content="{x:Static l:Language.Site}" Command="{Binding ElementName=Page , Path=DataContext.RedirectWebCiteCommand }" Style="{StaticResource Button}"
+                                        Width="125"
                                     CommandParameter="{Binding}"></Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -84,6 +103,46 @@
                 </DataGrid.Columns>
             </DataGrid>
 
+            <GroupBox Header="{x:Static l:Language.Price_calculator}" Grid.Row="4" Grid.Column="3" FontSize="18" VerticalAlignment="Top" Height="150" FontFamily="Segoe UI">
+                <Grid>
+                    <Label x:Name="label2" Grid.Column="3" Content="{x:Static l:Language.Number_of_coins}" HorizontalAlignment="Left" Margin="15,15,0,0" Grid.Row="3" VerticalAlignment="Top" FontFamily="Segoe UI"/>
+
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="15,55,0,0" TextWrapping="Wrap" Text="{Binding CalculatorValues,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197" FontFamily="Segoe UI">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding ReturnCalulatorResultCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <Label x:Name="label3" Grid.Column="3" Content="{Binding CalculatorResult,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="15,90,0,0" Grid.Row="4" VerticalAlignment="Top" FontFamily="Segoe UI"/>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox x:Name="groupBox" Header="{x:Static l:Language.Currency_converter}" Grid.Column="3" Grid.Row="4" VerticalAlignment="Bottom" Height="150" FontSize="18" FontFamily="Segoe UI">
+                <Grid>
+                    <Label Content="{Binding NameCoin}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,15,0,0" FontFamily="Segoe UI"></Label>
+                    <TextBox x:Name="textbox" Width="200" Text="{Binding ConverterValue , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,15,0,0" FontFamily="Segoe UI">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding ReturnConvertedResultCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <TextBox x:Name="textbox1" Width="200" Text="{Binding ConverterResult,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,45,0,0" FontFamily="Segoe UI">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding ReturnConvertedValueCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,45,0,0" ItemsSource="{Binding CoinNameList}" SelectedValue="{Binding SelectedValueComboBox}" FontFamily="Segoe UI" />
+
+                    <Label x:Name="label4" Content="$" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI"/>
+                    <Label x:Name="label6" Content="$" HorizontalAlignment="Left" Margin="160,40,0,0" VerticalAlignment="Top" FontFamily="Segoe UI"/>
+                </Grid>
+            </GroupBox>
+            <Button Command="{Binding ReturnInMainPage}" Style="{StaticResource Button}" Content="{x:Static l:Language.Return_to_the_main_page}" Width="190" Height="30" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,15,0,50"></Button>
         </Grid>
     </ScrollViewer>
 </Page>

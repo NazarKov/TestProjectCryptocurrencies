@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +24,8 @@ namespace TestProjectCryptocurrencies.View.HomePage
     {
         public HomeWindow()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(Properties.Settings.Default.languageCode);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.languageCode);
             InitializeComponent();
             DataContext = new HomeViewModel(frame);
         }

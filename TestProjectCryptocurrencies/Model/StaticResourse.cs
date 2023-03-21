@@ -9,5 +9,6 @@ namespace TestProjectCryptocurrencies.Model
     internal static class StaticResourse
     {
         public static Coin Coin { get; set; }
+        public static List<Coin> CoinList { get; set;}
     }
 }

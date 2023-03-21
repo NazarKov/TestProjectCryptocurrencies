@@ -1,0 +1,89 @@
+﻿<Page x:Class="TestProjectCryptocurrencies.View.SettingPage.SettingGeneralPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.SettingPage" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="405" d:DesignWidth="535"
+      Title="SettingGeneralPage">
+    <Page.DataContext>
+        <local:SettingGeneralViewModel></local:SettingGeneralViewModel>
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="120*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        <Label x:Name="Tittle" Content="{x:Static l:Language.General}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Grid.Row="0"/>
+        <Separator Grid.Row="0" Grid.ColumnSpan="4" VerticalAlignment="Top" Margin="90,16,0,0"></Separator>
+
+        <GroupBox x:Name="groupBox" Header="{x:Static l:Language.Design}" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="0" FontSize="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="label" Content="{x:Static l:Language.Topics}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding UpdateCountShowDataGrid}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="{x:Static l:Language.light}"></ComboBoxItem>
+                    <ComboBoxItem  Content="{x:Static l:Language.dark}"></ComboBoxItem>
+                </ComboBox>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="groupBox1" Header="{x:Static l:Language.localization}" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="0" FontSize="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="label1" Content="{x:Static l:Language.language}"  HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBox1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"  SelectedIndex="{Binding SelectedIdex}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ChangeLocalizationComman}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="{x:Static l:Language.English}"></ComboBoxItem>
+                    <ComboBoxItem  Content="{x:Static l:Language.Ukrainian}"></ComboBoxItem>
+                </ComboBox>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Page>

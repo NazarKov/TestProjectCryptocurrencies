@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,6 +23,7 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
 
         public MainViewModel() 
         {
+
             _model = new MainModel();
             _listCoints = new List<Coin>();
            
@@ -93,13 +95,12 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         private void RedirectWebCite(object parameter)
         {
             Process.Start(new ProcessStartInfo(((Coin)parameter).explorer) { UseShellExecute = true });
-
-
         }
         public ICommand OpenCoinInformanionComman { get => new DelegateParameterCommand(OpenCoinInformanion, CanRegister); }
         private void OpenCoinInformanion(object parameter)
         {
             StaticResourse.Coin = ((Coin)parameter);
+            StaticResourse.CoinList = ListCoints;
             Navigation.NavigationServise.OpenCoinInformationPage();
         }
         private bool CanRegister(object parameter) => true;

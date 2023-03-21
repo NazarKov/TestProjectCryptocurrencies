@@ -26,12 +26,12 @@ namespace TestProjectCryptocurrencies.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string NameCoin {
+        public string languageCode {
             get {
-                return ((string)(this["NameCoin"]));
+                return ((string)(this["languageCode"]));
             }
             set {
-                this["NameCoin"] = value;
+                this["languageCode"] = value;
             }
         }
     }
