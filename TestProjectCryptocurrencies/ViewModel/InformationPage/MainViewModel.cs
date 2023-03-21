@@ -72,7 +72,6 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
             set { _searchItem = value; OnPropertyChanged("SearchItem"); }
         }
 
-
         private void GetResponse()
         {
             ListCoints = _model.GetList(10);
@@ -85,7 +84,6 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         }
 
         public ICommand SearchCommand => _searchCommand;
-
         private void Search()
         {
             ListCoints = _model.GetItem(_searchItem);
@@ -95,7 +93,8 @@ namespace TestProjectCryptocurrencies.ViewModel.InformationPage
         private void RedirectWebCite(object parameter)
         {
             Process.Start(new ProcessStartInfo(((Coin)parameter).explorer) { UseShellExecute = true });
-        }
+        }   
+        
         public ICommand OpenCoinInformanionComman { get => new DelegateParameterCommand(OpenCoinInformanion, CanRegister); }
         private void OpenCoinInformanion(object parameter)
         {

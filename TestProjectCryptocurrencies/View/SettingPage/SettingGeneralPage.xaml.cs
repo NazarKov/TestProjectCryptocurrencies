@@ -24,7 +24,20 @@ namespace TestProjectCryptocurrencies.View.SettingPage
         public SettingGeneralPage()
         {
             InitializeComponent();
-            
+            //SetThemes();
+        }
+        private void SetThemes()
+        {
+            ResourceDictionary myResourceDictionary = new ResourceDictionary();
+            if (Properties.Settings.Default.Themes == "light")
+            {
+                myResourceDictionary.Source = new Uri("/Properties/Themes/light.xaml", UriKind.RelativeOrAbsolute);
+            }
+            else
+            {
+                myResourceDictionary.Source = new Uri("/Properties/Themes/dark.xaml", UriKind.RelativeOrAbsolute);
+            }
+            this.Resources.MergedDictionaries.Add(myResourceDictionary);
         }
     }
 }

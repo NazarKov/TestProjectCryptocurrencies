@@ -7,54 +7,10 @@
        xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage" x:Name="Page" >
+      Title="MainPage" x:Name="Page" Style="{DynamicResource page}">
     <Page.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </Page.DataContext>
-    <Page.Resources>
-        <Style x:Key="DataViewHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Padding" Value="6,3,6,3"/>
-        </Style>
-        <Style x:Key="Button" TargetType="Button">
-            <Setter Property="Background" Value="#66B2FF"></Setter>
-            <Setter Property="BorderBrush" Value="#3399FF"></Setter>
-            <Setter Property="Height" Value="25"></Setter>
-            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5"
-                                Background="{TemplateBinding Background}">
-
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TextBox" TargetType="TextBox">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="5"
-                                Background="{TemplateBinding Background}">
-
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="Black"></Setter>
-            <Setter Property="BorderThickness" Value="2"></Setter>
-        </Style>
-    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150*"></ColumnDefinition>
@@ -67,19 +23,35 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding ListCoints}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataViewHeaderStyle}" 
+        <DataGrid x:Name="dataGrid" Grid.Row="1"
+                  Grid.RowSpan="2"
+                  ItemsSource="{Binding ListCoints}"
+                  AutoGenerateColumns="False"
+                  Style="{DynamicResource DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource DataViewHeaderStyle}" 
                   GridLinesVisibility="None" SelectionMode="Single"
-                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CanUserAddRows="False" ColumnWidth="*" Background="#f5f5f5" BorderBrush="#ddd">
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch" 
+                  CanUserAddRows="False"
+                  ColumnWidth="*">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static l:Language.Name}" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="{x:Static l:Language.code}" Binding="{Binding symbol}"></DataGridTextColumn>
-                <DataGridTextColumn Header="{x:Static l:Language.rating}" Binding="{Binding rank}"  />
-                <DataGridTextColumn Header="{x:Static l:Language.Price}" Binding="{Binding priceUsd}" />
-                <DataGridTextColumn Header="{x:Static l:Language.Volume_in_24_hours}"  Binding="{Binding volumeUsd24Hr}" />
+                <DataGridTextColumn Header="{x:Static l:Language.Name}" 
+                                    Binding="{Binding name}"/>
+                <DataGridTextColumn Header="{x:Static l:Language.code}" 
+                                    Binding="{Binding symbol}"/>
+                <DataGridTextColumn Header="{x:Static l:Language.rating}" 
+                                    Binding="{Binding rank}"  />
+                <DataGridTextColumn Header="{x:Static l:Language.Price}"
+                                    Binding="{Binding priceUsd}" />
+                <DataGridTextColumn Header="{x:Static l:Language.Volume_in_24_hours}" 
+                                    Binding="{Binding volumeUsd24Hr}" />
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="{x:Static l:Language.Details}" Width="120" Command="{Binding ElementName=Page , Path=DataContext.OpenCoinInformanionComman }" Style="{StaticResource Button}" 
+                            <Button Content="{x:Static l:Language.Details}"
+                                    Width="120" 
+                                    Command="{Binding ElementName=Page , Path=DataContext.OpenCoinInformanionComman }"
+                                    Style="{DynamicResource Button}" 
                                     CommandParameter="{Binding}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -87,7 +59,9 @@
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="{x:Static l:Language.Site}" Width="120" Command="{Binding ElementName=Page , Path=DataContext.RedirectWebCiteCommand }" Style="{StaticResource Button}"  
+                            <Button Content="{x:Static l:Language.Site}" 
+                                    Width="120" Command="{Binding ElementName=Page , Path=DataContext.RedirectWebCiteCommand }" 
+                                    Style="{DynamicResource Button}"  
                                     CommandParameter="{Binding}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -96,29 +70,56 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <ContentControl x:Name="comboBox1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,450,0" Height="25"  Width="200" Content="{Binding}" >
+        <ContentControl x:Name="comboBox1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,0,450,0" 
+                        Height="25"
+                        Width="200"
+                        Content="{Binding}" >
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ComboBox x:Name="cb" ItemsSource="{Binding CountShowDataGrid}" SelectedValue="{Binding SelectedItemComboCox}" Width="200">
+                        <ComboBox x:Name="cb"
+                                  ItemsSource="{Binding CountShowDataGrid}"
+                                  SelectedValue="{Binding SelectedItemComboCox}"
+                                  Width="200">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding UpdateCountShowDataGrid}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ComboBox>
-                        <TextBlock x:Name="tb" Text="{x:Static l:Language.The_number_of_lines_is_10}" IsHitTestVisible="False" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Visibility="Hidden"/>
+                        <TextBlock x:Name="tb"
+                                   Text="{x:Static l:Language.The_number_of_lines_is_10}"
+                                   IsHitTestVisible="False" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="5,0,0,0" 
+                                   Visibility="Hidden"/>
                     </Grid>
                     <DataTemplate.Triggers>
-                        <Trigger SourceName="cb" Property="SelectedItem" Value="{x:Null}">
-                            <Setter TargetName="tb" Property="Visibility" Value="Visible"/>
+                        <Trigger SourceName="cb"
+                                 Property="SelectedItem"
+                                 Value="{x:Null}">
+                            <Setter TargetName="tb"
+                                    Property="Visibility" 
+                                    Value="Visible"/>
                         </Trigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
 
-        <TextBox x:Name="textBox"  VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Segoe UI" Height="25" FontSize="18" Text="{Binding SearchItem,UpdateSourceTrigger=PropertyChanged}" Width="200" >
+        <TextBox x:Name="textBox" 
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center" 
+                 TextWrapping="Wrap"
+                 Height="25"
+                 FontSize="18" 
+                 Text="{Binding SearchItem,UpdateSourceTrigger=PropertyChanged}"
+                 Width="200" 
+                 Style="{Binding textbox}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding SearchCommand}" />

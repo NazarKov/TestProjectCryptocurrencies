@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TestProjectCryptocurrencies.View.SettingPage;
@@ -19,10 +20,7 @@ namespace TestProjectCryptocurrencies.ViewModel.SettingPage
 
         public SettingViewModel()
         {
-            
-
             _openGenarelSettingCommand = new DelegateCommand(() => { Pages = new SettingGeneralPage(); });
-
         }
 
         public ICommand OpenGeneralSettingCommand => _openGenarelSettingCommand;

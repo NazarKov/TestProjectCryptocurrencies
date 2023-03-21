@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using TestProjectCryptocurrencies.Model;
 using TestProjectCryptocurrencies.View.InfomationPage;
@@ -26,7 +27,14 @@ namespace TestProjectCryptocurrencies.ViewModel.HomePage
 
             Navigation.Init(frame);
             Navigation.NavigationServise.OpenMainPage();
-           
+            SetThemes();
+        }
+        private void SetThemes()
+        {
+            Application.Current.Resources.MergedDictionaries.Clear();
+            var dictionary = new ResourceDictionary();
+            dictionary.Source = new Uri("/Properties/Themes/" + Properties.Settings.Default.Themes.ToString() + ".xaml", UriKind.Relative);
+            Application.Current.Resources.MergedDictionaries.Add(dictionary);
         }
 
         public ICommand OpenSettingCommand => _openSettingCommand;

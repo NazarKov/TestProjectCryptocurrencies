@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.SettingPage"
         xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="450" Width="800">
+        Title="SettingWindow" Height="450" Width="800" Style="{DynamicResource window}">
     <Window.DataContext>
         <local:SettingViewModel></local:SettingViewModel>
     </Window.DataContext>
@@ -15,14 +15,27 @@
             <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition Width="550"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Margin="5,5,5,-405" BorderBrush="Black" BorderThickness="0.4">
-            <Canvas>
-                <Button x:Name="button"             Content="{x:Static l:Language.General}" Canvas.Left="1" Canvas.Top="1"    Width="238" BorderBrush="White" Background="White" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Command="{Binding OpenGeneralSettingCommand}" />
-         
+        <Border Grid.Column="0" 
+                Margin="5,5,5,-405" 
+                BorderBrush="Black"
+                BorderThickness="0.4">
+            <Canvas Style="{DynamicResource canvas}">
+                <Button x:Name="button"    
+                        Content="{x:Static l:Language.General}"  
+                        Width="239" Style="{DynamicResource ButtonSetting}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Height="30" 
+                        Command="{Binding OpenGeneralSettingCommand}" />
+
             </Canvas>
         </Border>
-        <Canvas Grid.Column="1" Margin="5,5,6,-405" Width="535" VerticalAlignment="Top">
-            <Frame Content="{Binding Pages}" NavigationUIVisibility="Hidden"></Frame>
+        <Canvas Grid.Column="1"
+                Margin="5,5,6,-405"
+                Width="535" 
+                VerticalAlignment="Top">
+            <Frame Content="{Binding Pages}"
+                   NavigationUIVisibility="Hidden"/>
         </Canvas>
     </Grid>
 </Window>

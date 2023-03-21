@@ -7,7 +7,7 @@
       xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="405" d:DesignWidth="535"
-      Title="SettingGeneralPage">
+      Title="SettingGeneralPage" Style="{DynamicResource page}">
     <Page.DataContext>
         <local:SettingGeneralViewModel></local:SettingGeneralViewModel>
     </Page.DataContext>
@@ -32,10 +32,25 @@
         </Grid.ColumnDefinitions>
 
 
-        <Label x:Name="Tittle" Content="{x:Static l:Language.General}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Grid.Row="0"/>
-        <Separator Grid.Row="0" Grid.ColumnSpan="4" VerticalAlignment="Top" Margin="90,16,0,0"></Separator>
+        <Label x:Name="Tittle" 
+               Content="{x:Static l:Language.General}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" 
+               FontSize="18"
+               Grid.Row="0"/>
+        <Separator Grid.Row="0"
+                   Grid.ColumnSpan="4" 
+                   VerticalAlignment="Top"
+                   Margin="90,16,0,0"/>
 
-        <GroupBox x:Name="groupBox" Header="{x:Static l:Language.Design}" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="0" FontSize="15">
+        <GroupBox x:Name="groupBox" 
+                  Header="{x:Static l:Language.Design}"
+                  Grid.Row="1" 
+                  Grid.ColumnSpan="4" 
+                  Grid.RowSpan="2" 
+                  Grid.Column="0" 
+                  FontSize="15"
+                  Style="{DynamicResource GroupBox}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30*"></RowDefinition>
@@ -46,21 +61,38 @@
                     <ColumnDefinition Width="5"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="label" Content="{x:Static l:Language.Topics}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120">
+                <Label x:Name="label" 
+                       Content="{x:Static l:Language.Topics}"
+                       HorizontalAlignment="Left"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBox"
+                          Grid.Column="1" 
+                          HorizontalAlignment="Center" 
+                          SelectedIndex="{Binding SelectedIndexThemes}"
+                          VerticalAlignment="Center"
+                          Width="120">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding UpdateCountShowDataGrid}"/>
+                            <i:InvokeCommandAction Command="{Binding ChangeThemesComman}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ComboBoxItem Content="{x:Static l:Language.light}"></ComboBoxItem>
-                    <ComboBoxItem  Content="{x:Static l:Language.dark}"></ComboBoxItem>
+                    <ComboBoxItem Content="{x:Static l:Language.light}"/>
+                    <ComboBoxItem  Content="{x:Static l:Language.dark}"/>
                 </ComboBox>
 
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="groupBox1" Header="{x:Static l:Language.localization}" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="0" FontSize="15">
+        <GroupBox x:Name="groupBox1"
+                  Header="{x:Static l:Language.localization}"
+                  Grid.Row="3"
+                  Grid.ColumnSpan="4" 
+                  Grid.RowSpan="2"
+                  Grid.Column="0"
+                  FontSize="15"
+                  Style="{DynamicResource GroupBox}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30*"></RowDefinition>
@@ -71,15 +103,25 @@
                     <ColumnDefinition Width="5"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="label1" Content="{x:Static l:Language.language}"  HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="comboBox1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"  SelectedIndex="{Binding SelectedIdex}">
+                <Label x:Name="label1" 
+                       Content="{x:Static l:Language.language}"
+                       HorizontalAlignment="Left"
+                       Grid.Column="0" 
+                       Grid.Row="0" 
+                       VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBox1"
+                          Grid.Column="1"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Width="120"  
+                          SelectedIndex="{Binding SelectedIdex}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding ChangeLocalizationComman}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ComboBoxItem Content="{x:Static l:Language.English}"></ComboBoxItem>
-                    <ComboBoxItem  Content="{x:Static l:Language.Ukrainian}"></ComboBoxItem>
+                    <ComboBoxItem Content="{x:Static l:Language.English}"/>
+                    <ComboBoxItem  Content="{x:Static l:Language.Ukrainian}"/>
                 </ComboBox>
 
             </Grid>

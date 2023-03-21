@@ -6,19 +6,46 @@
         xmlns:local="clr-namespace:TestProjectCryptocurrencies.ViewModel.HomePage" 
         xmlns:l="clr-namespace:TestProjectCryptocurrencies.Properties"
         mc:Ignorable="d"
-        Title="{x:Static l:Language.Home_page}" Height="450" Width="800" WindowState="Maximized" x:Name="window">
-
+        Title="{x:Static l:Language.Home_page}" 
+        Height="450" 
+        Width="800"
+        Style="{DynamicResource window}"
+        WindowState="Maximized" 
+        x:Name="window">
+  
     <Grid>
-        <Menu VerticalAlignment="Top" Height="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Menu VerticalAlignment="Top" 
+              Grid.Row="0" 
+              Height="20" 
+              Style="{DynamicResource Menu}">
             <MenuItem Header="{x:Static l:Language.program}">
-                <MenuItem Header="{x:Static l:Language.settings}" Command="{Binding OpenSettingCommand}"></MenuItem>
-                <MenuItem Header="{x:Static l:Language.exit}"  Command="{Binding ExitWindow}" CommandParameter="{Binding ElementName=window, Mode=OneWay}"></MenuItem>
+                <MenuItem Header="{x:Static l:Language.settings}" 
+                          Command="{Binding OpenSettingCommand}" 
+                          Style="{DynamicResource MenuItem}">
+                </MenuItem>
+                <MenuItem Header="{x:Static l:Language.exit}" 
+                          Command="{Binding ExitWindow}"
+                          CommandParameter="{Binding ElementName=window, Mode=OneWay}" 
+                          Style="{DynamicResource MenuItem}">
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="{x:Static l:Language.Program_website}" Command="{Binding ElementName=window , Path=DataContext.RedirectWebCiteCommand }"  
-                                    CommandParameter="{Binding}"></MenuItem>
+            <MenuItem Header="{x:Static l:Language.Program_website}"
+                      Command="{Binding ElementName=window , Path=DataContext.RedirectWebCiteCommand }" 
+                      CommandParameter="{Binding}">
+            </MenuItem>
         </Menu>
 
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>
+        <Frame x:Name="frame" 
+               Grid.Row="1" 
+               NavigationUIVisibility="Hidden" 
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch">
+        </Frame>
       
        
 

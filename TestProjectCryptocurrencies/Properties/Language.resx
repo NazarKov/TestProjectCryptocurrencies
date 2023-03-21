@@ -201,6 +201,9 @@
   <data name="rating" xml:space="preserve">
     <value>Рейтинг</value>
   </data>
+  <data name="restart Program" xml:space="preserve">
+    <value>Для зміни мови перезагрузіть програму</value>
+  </data>
   <data name="Return to the main page" xml:space="preserve">
     <value>Повернутися на головну</value>
   </data>
